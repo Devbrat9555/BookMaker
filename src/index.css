@@ -171,24 +171,32 @@
 
 /* Editor Word-Like Simulation */
 .editor-a4 .ProseMirror {
-  width: 210mm;
-  min-height: 297mm;
-  padding: 20mm;
+  width: 100%;
+  min-height: 100vh;
+  padding: 15px;
   background-color: white;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   outline: none;
-  /* Visual Page Break Indicator */
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0mm,
-    transparent 296mm,
-    #64748b 296mm,
-    #64748b 296.5mm,
-    transparent 296.5mm,
-    transparent 297mm
-  );
-  background-size: 100% 297mm;
+}
+
+@media (min-width: 768px) {
+  .editor-a4 .ProseMirror {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    /* Visual Page Break Indicator */
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0mm,
+      transparent 296mm,
+      #64748b 296mm,
+      #64748b 296.5mm,
+      transparent 296.5mm,
+      transparent 297mm
+    );
+    background-size: 100% 297mm;
+  }
 }
 
 /* Page Break Element */

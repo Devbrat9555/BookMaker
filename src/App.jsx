@@ -349,7 +349,7 @@ function App() {
   };
 
   // Compute workspace classes
-  const workspaceClasses = `flex-1 overflow-y-auto custom-scrollbar p-6 pb-20 relative flex flex-col items-center editor-workspace ${settings.darkMode ? 'bg-[#020617]' : 'bg-slate-200'}`;
+  const workspaceClasses = `flex-1 overflow-y-auto custom-scrollbar p-0 md:p-6 pb-20 relative flex flex-col items-center editor-workspace ${settings.darkMode ? 'bg-[#020617]' : 'bg-slate-200'}`;
   
   // Compute page classes
   const editorClasses = `editor-a4 prose max-w-none focus:outline-none w-full bg-${settings.pageBg} margin-${settings.margin} ${settings.gridlines ? 'show-gridlines' : ''}`;
@@ -359,22 +359,24 @@ function App() {
       
       {/* Top Title Bar */}
       {!fullScreen && (
-        <header className="border-b px-6 py-2 flex items-center justify-between shrink-0 transition-colors">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-lg flex items-center justify-center font-bold text-xl shadow-sm">B</div>
-            <div>
-              <h1 className="text-lg font-bold tracking-tight flex items-center gap-2">BookMaker <span className="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded-full uppercase font-bold">Ultimate</span></h1>
+        <header className="border-b px-4 md:px-6 py-2 flex flex-col md:flex-row items-center justify-between gap-3 shrink-0 transition-colors">
+          <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-lg flex items-center justify-center font-bold text-xl shadow-sm">B</div>
+              <div>
+                <h1 className="text-lg font-bold tracking-tight flex items-center gap-2">BookMaker <span className="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded-full uppercase font-bold hidden md:inline-block">Ultimate</span></h1>
+              </div>
             </div>
           </div>
           
-          <div className="flex items-center gap-6">
-            <div className="text-xs flex gap-4 opacity-70">
+          <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end overflow-x-auto">
+            <div className="text-[10px] md:text-xs flex gap-2 md:gap-4 opacity-70 whitespace-nowrap">
                <span><strong>{editor?.storage.characterCount.words() || 0}</strong> words</span>
                <span><strong>{editor?.storage.characterCount.characters() || 0}</strong> chars</span>
             </div>
-            <div className="flex gap-2">
-              <button onClick={saveDraft} className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-md text-xs font-bold transition-all"><Save size={14} /> Save Draft</button>
-              <button onClick={handlePrint} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-xs font-bold transition-all shadow-sm"><FileOutput size={14} /> Export PDF</button>
+            <div className="flex gap-2 shrink-0">
+              <button onClick={saveDraft} className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 md:px-3 py-1.5 rounded-md text-xs font-bold transition-all"><Save size={14} /> <span className="hidden md:inline">Save Draft</span></button>
+              <button onClick={handlePrint} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-3 py-1.5 rounded-md text-xs font-bold transition-all shadow-sm"><FileOutput size={14} /> <span className="hidden md:inline">Export PDF</span></button>
             </div>
           </div>
         </header>
@@ -382,7 +384,7 @@ function App() {
 
       {/* Ribbon Tabs Header */}
       {!fullScreen && (
-        <div className="flex border-b border-gray-200 bg-slate-50 px-2 shrink-0 ribbon-menu">
+        <div className="flex border-b border-gray-200 bg-slate-50 px-2 shrink-0 ribbon-menu overflow-x-auto custom-scrollbar w-full">
           {['home', 'insert', 'layout', 'view'].map(tab => (
             <button 
               key={tab}
@@ -436,7 +438,7 @@ function App() {
         <section className={workspaceClasses}>
           
           {/* Zoom Controls */}
-          <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border border-gray-300 rounded-full shadow-lg px-4 py-1.5 flex items-center gap-4 mb-8 transition-all hover:bg-white w-max mt-2">
+          <div className="hidden md:flex sticky top-0 z-30 bg-white/90 backdrop-blur-md border border-gray-300 rounded-full shadow-lg px-4 py-1.5 items-center gap-4 mb-8 transition-all hover:bg-white w-max mt-2">
             <button onClick={() => setZoom(z => Math.max(50, z - 10))} className="hover:text-blue-600 font-bold text-gray-500 transition-colors"><Minus size={16}/></button>
             <span className="text-sm font-bold text-gray-700 w-12 text-center select-none">{zoom}%</span>
             <button onClick={() => setZoom(z => Math.min(200, z + 10))} className="hover:text-blue-600 font-bold text-gray-500 transition-colors"><Plus size={16}/></button>
@@ -446,8 +448,8 @@ function App() {
 
           <div 
             ref={printRef}
-            className="transition-transform duration-200 ease-out origin-top relative" 
-            style={{ transform: `scale(${zoom / 100})`, width: '210mm' }}
+            className="transition-transform duration-200 ease-out origin-top relative w-full md:w-[210mm]" 
+            style={{ transform: `scale(${zoom / 100})` }}
           >
             {settings.watermark && (
               <div className="watermark-overlay no-print">
