@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-100 text-gray-900;
+  }
+}
+
+/* Custom Scrollbar for modern look */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full border-2 border-transparent bg-clip-padding;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Print Specific CSS */
+@page {
+  size: A4;
+  margin: 20mm;
+}
+
+@media print {
+  body {
+    background-color: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+  
+  .print-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+  min-height: 100%;
+}
+
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold mt-8 mb-6 text-blue-900 bg-blue-50 border-l-8 border-blue-600 p-6 rounded-r-lg shadow-sm text-center leading-snug;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold mt-8 mb-4 text-emerald-800 border-b-2 border-emerald-400 pb-2;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-bold mt-6 mb-3 text-amber-800;
+}
+
+.ProseMirror h6 {
+  @apply text-sm text-gray-500 uppercase tracking-widest text-right mb-2 mt-4;
+}
+
+.ProseMirror hr {
+  @apply border-t-2 border-gray-200 my-8;
+}
+
+.ProseMirror p {
+  @apply mb-4 text-gray-800 text-[12pt] font-sans text-justify;
+  line-height: 1.8;
+}
+
+.ProseMirror blockquote p {
+  @apply m-0 p-0 text-[11.5pt] font-sans;
+}
+
+.ProseMirror blockquote p {
+  @apply m-0 p-0 text-[11.5pt] font-sans;
+}
+
+.ProseMirror pre {
+  @apply bg-[#fffbeb] border border-orange-100 border-l-4 border-l-orange-500 p-5 my-6 text-orange-900 shadow-sm font-sans whitespace-pre-wrap text-[11.5pt] rounded-r-lg;
+  line-height: 1.7;
+}
+
+.ProseMirror pre code {
+  @apply font-sans text-[11.5pt];
+}
+
+.ProseMirror ul {
+  @apply list-disc list-outside ml-6 mb-4 text-gray-800 text-[12pt];
+  line-height: 1.8;
+}
+
+.ProseMirror ol {
+  @apply list-decimal list-outside ml-6 mb-4 text-gray-800 text-[12pt];
+  line-height: 1.8;
+}
+
+.ProseMirror img {
+  @apply max-w-full h-auto rounded-md my-6 shadow-md mx-auto;
+  page-break-inside: avoid;
+}
+
+/* Table Styles */
+.ProseMirror table {
+  @apply border-collapse table-fixed w-full my-6 overflow-hidden rounded-lg shadow-sm border border-gray-300 bg-white;
+}
+
+.ProseMirror th {
+  @apply bg-slate-800 text-white font-bold p-3 text-left border border-slate-700 text-[11pt];
+}
+
+.ProseMirror td {
+  @apply border border-gray-300 p-3 text-[11pt] bg-white relative;
+}
+
+.ProseMirror td > * {
+  @apply mb-0;
+}
+
+.ProseMirror th p, .ProseMirror td p {
+  @apply m-0;
+}
+
+.ProseMirror .selectedCell:after {
+  @apply z-10 absolute inset-0 bg-blue-500/20 pointer-events-none content-[''];
+}
+
+.ProseMirror .column-resize-handle {
+  @apply absolute right-[-2px] top-0 bottom-[-2px] w-1 bg-blue-300 pointer-events-none z-20;
+}
+
+/* A4 Page Simulation for Screen */
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  background-color: white;
+  background-image: linear-gradient(to bottom, transparent 296mm, #94a3b8 296mm, #94a3b8 297mm);
+  background-size: 100% 297mm;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+/* Editor Word-Like Simulation */
+.editor-a4 .ProseMirror {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  background-color: white;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  outline: none;
+  /* Visual Page Break Indicator */
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0mm,
+    transparent 296mm,
+    #64748b 296mm,
+    #64748b 296.5mm,
+    transparent 296.5mm,
+    transparent 297mm
+  );
+  background-size: 100% 297mm;
+}
+
+/* Page Break Element */
+.ProseMirror .page-break {
+  @apply w-full border-t-2 border-dashed border-gray-400 my-8 relative flex justify-center items-center;
+  page-break-after: always;
+  break-after: page;
+}
+.ProseMirror .page-break::after {
+  content: '✂--- PAGE BREAK ---✂';
+  @apply absolute bg-white px-4 text-xs font-bold text-gray-500 tracking-widest;
+}
+
+@media print {
+  .a4-page {
+    margin: 0;
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+    background-image: none !important;
+  }
+  .editor-a4 .ProseMirror {
+    background-image: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .ProseMirror .page-break {
+    border: none !important;
+    margin: 0 !important;
+  }
+  .ProseMirror .page-break::after {
+    display: none !important;
+  }
+}
+
+/* Advanced Formatting */
+.ProseMirror .dropcap::first-letter {
+  @apply text-5xl font-bold float-left mr-2 mt-1 text-blue-800 leading-none;
+}
+.ProseMirror .columns-2 {
+  column-count: 2;
+  column-gap: 2rem;
+}
+
+/* New Box Types */
+.ProseMirror blockquote {
+  @apply border-2 p-5 my-6 rounded-lg shadow-sm font-sans relative overflow-hidden;
+  line-height: 1.7;
+}
+.ProseMirror blockquote.blue { @apply bg-blue-50 border-blue-400 text-blue-900; }
+.ProseMirror blockquote.warning { @apply bg-red-50 border-red-400 text-red-900; }
+.ProseMirror blockquote.success { @apply bg-green-50 border-green-400 text-green-900; }
+.ProseMirror blockquote.info { @apply bg-purple-50 border-purple-400 text-purple-900; }
+
+.ProseMirror blockquote.question { @apply bg-orange-50 border-orange-400 text-orange-900 border-l-8; }
+.ProseMirror blockquote.exercise { @apply bg-slate-100 border-slate-500 text-slate-900 border-l-8; }
+.ProseMirror blockquote.solution { @apply bg-emerald-50 border-emerald-400 text-emerald-900 border-l-8; }
+
+.ProseMirror blockquote.theorem { @apply bg-indigo-50 border-indigo-500 text-indigo-900 border-t-8 border-b-8 border-l-2 border-r-2 rounded-none; }
+.ProseMirror blockquote.formula { @apply bg-yellow-50 border-yellow-400 text-yellow-900 border-dashed border-4; }
+.ProseMirror blockquote.hint { @apply bg-teal-50 border-teal-400 text-teal-900 border-l-4; }
+.ProseMirror blockquote.summary { @apply bg-gray-50 border-gray-400 text-gray-800 border-4 border-double; }
+
+/* Watermark */
+.watermark-overlay {
+  @apply absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-10 opacity-5;
+}
+.watermark-text {
+  @apply text-[150px] font-black text-gray-900 -rotate-45 select-none text-center leading-none;
+}
+
+/* --- NEW PRO FEATURES --- */
+
+/* Dark Mode Studio */
+body.dark-studio {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+.dark-studio header {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+.dark-studio .text-gray-900 { color: #f8fafc; }
+.dark-studio .bg-white { background-color: #1e293b; }
+.dark-studio .border-gray-200 { border-color: #334155; }
+.dark-studio .text-gray-500 { color: #94a3b8; }
+.dark-studio .bg-slate-50 { background-color: #0f172a; }
+.dark-studio .bg-slate-100 { background-color: #1e293b; }
+.dark-studio .bg-slate-200 { background-color: #020617; } /* Workspace */
+.dark-studio .editor-workspace {
+  background-color: #020617;
+}
+
+/* Editor Margins */
+.editor-a4.margin-normal .ProseMirror { padding: 25.4mm; }
+.editor-a4.margin-narrow .ProseMirror { padding: 12.7mm; }
+.editor-a4.margin-wide .ProseMirror { padding: 50.8mm; }
+
+/* Editor Backgrounds */
+.editor-a4.bg-sepia .ProseMirror { background-color: #fdf6e3; }
+.editor-a4.bg-gray .ProseMirror { background-color: #f1f5f9; }
+
+/* Gridlines */
+.editor-a4.show-gridlines .ProseMirror {
+  background-image: linear-gradient(transparent 95%, #cbd5e1 95%), linear-gradient(90deg, transparent 95%, #cbd5e1 95%);
+  background-size: 15px 15px;
+}
+
+/* Table of Contents Block */
+.ProseMirror .toc-block {
+  @apply bg-slate-50 border border-slate-300 p-6 rounded-lg my-6;
+}
+.ProseMirror .toc-block::before {
+  content: 'Table of Contents / अनुक्रमणिका';
+  @apply block text-2xl font-bold border-b-2 border-slate-300 pb-2 mb-4 text-slate-800;
+}
